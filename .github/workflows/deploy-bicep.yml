@@ -8,7 +8,7 @@ on:
 
 jobs:
   deploy-infrastructure:
-    runs-on: ubuntu-latest
+    runs-on: pe-arc-runner-shared-npd
     env:
       AZURE_CLIENT_ID: ${{ vars.AZURE_CLIENT_ID }}
       AZURE_SUBSCRIPTION_ID: ${{ vars.AZURE_SUBSCRIPTION_ID }}
