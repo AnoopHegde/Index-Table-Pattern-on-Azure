@@ -1,9 +1,9 @@
 // Parameters
 param location string = resourceGroup().location
 param storageAccountName string = 'indextablestorage'
-param functionAppName string = 'indexTableFunctionApp'
-param appInsightsName string = 'indexTableAppInsights'
-param searchServiceName string = 'indexTableSearchService'
+param functionAppName string = 'indextablefunctionapp'
+param appInsightsName string = 'indextableappinsights'
+param searchServiceName string = 'indextablesearchservice'
 param searchServiceSku string = 'standard'
 
 // Azure Storage Account
