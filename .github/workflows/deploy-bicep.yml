@@ -31,7 +31,7 @@ jobs:
         rm cert.pfx
         rm client.crt
         rm client.key
-        az deployment group create --resource-group <your-resource-group> --template-file infrastructure/azure-resources.bicep
+        az deployment group create --resource-group test-rg --template-file infrastructure/azure-resources.bicep
       working-directory: ${{ inputs.working-directory }}
 
     #- name: Set up Azure CLI
