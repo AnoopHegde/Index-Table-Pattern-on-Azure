@@ -19,28 +19,28 @@ jobs:
     - name: Checkout code
       uses: actions/checkout@v2
 
-    - name: AZ Cli login  
-      shell: bash
-      run: |
-        echo "${{ secrets.ARM_CLIENT_CERTIFICATE }}" > client.crt
-        echo "${{ secrets.ARM_CLIENT_KEY }}" > client.key
-        openssl pkcs12 -export -password pass:"Pa55w0rd123" -out cert.pfx -inkey client.key -in client.crt
-        openssl pkcs12 -in cert.pfx -out cert.pem -nodes -passin pass:"Pa55w0rd123"
-        az login --service-principal -u $ARM_CLIENT_ID -p cert.pem --tenant $ARM_TENANT_ID
-        az account set -s $ARM_SUBSCRIPTION_ID
-        rm cert.pfx
-        rm client.crt
-        rm client.key
-        az deployment group create --resource-group test-rg --template-file infrastructure/azure-resources.bicep
-      working-directory: ${{ inputs.working-directory }}
+    #- name: AZ Cli login  
+    #  shell: bash
+    #  run: |
+    #    echo "${{ secrets.ARM_CLIENT_CERTIFICATE }}" > client.crt
+    #    echo "${{ secrets.ARM_CLIENT_KEY }}" > client.key
+    #    openssl pkcs12 -export -password pass:"Pa55w0rd123" -out cert.pfx -inkey client.key -in client.crt
+    #    openssl pkcs12 -in cert.pfx -out cert.pem -nodes -passin pass:"Pa55w0rd123"
+    #    az login --service-principal -u $ARM_CLIENT_ID -p cert.pem --tenant $ARM_TENANT_ID
+    #    az account set -s $ARM_SUBSCRIPTION_ID
+    #    rm cert.pfx
+    #    rm client.crt
+    #    rm client.key
+    #    az deployment group create --resource-group test-rg --template-file infrastructure/azure-resources.bicep
+    #  working-directory: ${{ inputs.working-directory }}
 
-    #- name: Set up Azure CLI
-    #  uses: azure/cli@v2.1.0
-    #  with:
-    #    azcliversion: 'latest'
-    #    inlineScript: |
-    #      # Log in to Azure
-    #      az login --service-principal -u ${{ secrets.AZURE_CLIENT_ID }} -p ${{ secrets.AZURE_CLIENT_SECRET }} --tenant ${{ secrets.AZURE_TENANT_ID }}
+    - name: Set up Azure CLI
+      uses: azure/cli@v2.1.0
+      with:
+        azcliversion: 'latest'
+        inlineScript: |
+          # Log in to Azure
+          az login --service-principal -u ${{ secrets.AZURE_CLIENT_ID }} -p ${{ secrets.AZURE_CLIENT_SECRET }} --tenant ${{ secrets.AZURE_TENANT_ID }}
 
-    #      # Deploy Bicep Template
-    #      az deployment group create --resource-group <your-resource-group> --template-file infrastructure/azure-resources.bicep
+          # Deploy Bicep Template
+          az deployment group create --resource-group <your-resource-group> --template-file infrastructure/azure-resources.bicep
