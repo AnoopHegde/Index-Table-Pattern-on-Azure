@@ -25,9 +25,7 @@ jobs:
         creds: ${{ secrets.AZURE_CREDENTIALS }}
         
     - name: Deploy bicep file
-      uses: azure/arm-deploy@v1
-      with:
-        subscriptionId: ${{ secrets.AZURE_SUBSCRIPTION }}
-        resourceGroupName: ${{ secrets.AZURE_RG }}
-        template: infrastructure/azure-resources.bicep
+      shell: bash
+      run: |
+        az deployment group create --resource-group test-rg --template-file infrastructure/azure-resources.bicep
         
